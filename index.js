@@ -1,5 +1,6 @@
 const { JSDOM } = require('jsdom');
 const schemas = require('schemas');
+const Assistance = require('./src/Assistance');
 const Campus = require('./src/Campus');
 const Cohort = require('./src/Cohort');
 const CohortMembership = require('./src/CohortMembership');
@@ -23,6 +24,7 @@ const User = require('./src/User');
 
 module.exports = (conn) => {
   const {
+    AssistanceSchema,
     CampusSchema,
     CohortSchema,
     CohortMembershipSchema,
@@ -45,6 +47,7 @@ module.exports = (conn) => {
   } = schemas(conn, (new JSDOM()).window.document);
 
   return {
+    Assistance: Assistance(conn, AssistanceSchema),
     Campus: Campus(conn, CampusSchema),
     Cohort: Cohort(conn, CohortSchema),
     CohortMembership: CohortMembership(conn, CohortMembershipSchema),
